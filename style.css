@@ -1,0 +1,409 @@
+/* --- VARIABLES & RESET --- */
+:root {
+    --color-navy: #0a2540;
+    --color-sky: #1f8ef1;
+    --color-white: #ffffff;
+    --color-text: #3e4a5b;
+    --color-light-bg: #f6f9fc;
+    --color-border: #e6ebf1;
+    
+    --section-spacing: 100px;
+    --container-width: 1140px;
+    --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text);
+    line-height: 1.6;
+    background-color: var(--color-white);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    color: var(--color-navy);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.container {
+    width: 90%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    background-color: var(--color-sky);
+    color: var(--color-white);
+    font-weight: 600;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(31, 142, 241, 0.2);
+    background-color: #167add;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* --- ANIMATION UTILS --- */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+/* --- HEADER --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    background: transparent;
+    z-index: 1000;
+    transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 15px 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-white);
+    letter-spacing: -1px;
+}
+
+.header.scrolled .logo {
+    color: var(--color-navy);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+}
+
+.nav-link:hover {
+    color: var(--color-white);
+}
+
+.header.scrolled .nav-link {
+    color: var(--color-text);
+}
+
+.header.scrolled .nav-link:hover {
+    color: var(--color-sky);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    position: relative;
+    padding: 220px 0 150px;
+    background: linear-gradient(135deg, var(--color-navy) 0%, #163b63 100%);
+    color: var(--color-white);
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(31, 142, 241, 0.1) 0%, rgba(0,0,0,0) 70%);
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 700px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    color: var(--color-white);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+/* --- ABOUT SECTION --- */
+.about {
+    padding: var(--section-spacing) 0;
+    background-color: var(--color-white);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    opacity: 0.8;
+}
+
+.about-image {
+    height: 400px;
+    background: var(--color-light-bg);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: linear-gradient(45deg, #e6ebf1, #f6f9fc); 
+}
+
+/* --- BENEFITS SECTION --- */
+.benefits {
+    padding: var(--section-spacing) 0;
+    background-color: var(--color-light-bg);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.benefit-card {
+    background: var(--color-white);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(31, 142, 241, 0.1);
+}
+
+.benefit-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(31, 142, 241, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: var(--color-sky);
+}
+
+.benefit-icon svg {
+    width: 30px;
+    height: 30px;
+}
+
+.benefit-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.benefit-card p {
+    color: var(--color-text);
+    opacity: 0.8;
+}
+
+/* --- EMAIL CAPTURE --- */
+.email-capture {
+    padding: 120px 0;
+    background: var(--color-navy);
+    color: var(--color-white);
+    text-align: center;
+}
+
+.email-capture h2 {
+    color: var(--color-white);
+    font-size: 3rem;
+    margin-bottom: 40px;
+}
+
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.email-form {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.email-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 15px 24px;
+    font-size: 1rem;
+    color: var(--color-white);
+    outline: none;
+}
+
+.email-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-note {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    display: none;
+    font-weight: 500;
+}
+
+/* --- FOOTER --- */
+.footer {
+    padding: 80px 0 40px;
+    background: var(--color-white);
+    color: var(--color-navy);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.footer-logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--color-navy);
+}
+
+.footer-links {
+    display: flex;
+    gap: 30px;
+}
+
+.footer-links a {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    opacity: 0.7;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    color: var(--color-sky);
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 40px;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    opacity: 0.5;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+    .hero h1 { font-size: 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-image { height: 300px; order: -1; }
+}
+
+@media (max-width: 768px) {
+    .nav-menu { display: none; }
+    .hero { padding-top: 150px; }
+    .hero h1 { font-size: 2.5rem; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .email-capture h2 { font-size: 2rem; }
+    .email-form { flex-direction: column; background: transparent; border: none; padding: 0; }
+    .email-input { background: rgba(255,255,255,0.1); border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.2); }
+    .btn-form { width: 100%; border-radius: 8px; }
+    .footer-content { flex-direction: column; gap: 30px; }
+}
